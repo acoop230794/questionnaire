@@ -1,0 +1,17 @@
+nav {
+    background-color: lightskyblue;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+}
+nav ul {
+    display: flex;
+    justify-content: space-around;
+}
+nav ul li{
+    list-style: none;
+    padding: 5px 10px;
+}
+nav li a {
+    text-decoration: none;
+}
