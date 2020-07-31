@@ -1,20 +1,20 @@
 import React from 'react';
 import './Register.css';
 
-const Home = () => {
+const Register = (props) => {
     
     return(
         <div className = "register">
-            {/* <h2>Register</h2>
+            <h1>Register page</h1>
             <form>
-                <input type="text" name="username" onChange={setData} placeholder="Enter username..."/>
-                <input type="email" name="userEmail" onChange={setData} placeholder="Enter email..." />
-                <input type="password" name="userPassword" onChange={setData} placeholder="Enter password..."/>
-                <input type="password" name="userConfPassword" onChange={setData} placeholder="Confirm password..."/>
-                <button type="submit" onClick={registerUserDetails}>REGISTER</button>
-            </form> */}
+                <input type="text" name="username" onChange={props.setUserData} placeholder="Enter username..."/><br />
+                <input type="email" name="userEmail" onChange={props.setUserData} placeholder="Enter email..." /><br />
+                <input type="password" name="userPassword" onChange={props.setUserData} placeholder="Enter password..."/><br />
+                <input type="password" name="userConfPassword" onChange={props.setUserData} placeholder="Confirm password..."/><br />
+                <button type="submit" onClick={props.registerUser}>REGISTER</button>
+            </form>
         </div>
     )
 }
 
-export default Home;
+export default Register;

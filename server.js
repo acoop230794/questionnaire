@@ -94,6 +94,8 @@ app.post('/register', async (req, res) => {
     let userEmail = req.body.email;
     let userPassword = req.body.password;
     let userConfPassword = req.body.passwordConf;
+    let userScore = 0;
+    let userTime = 0;
 
     
     if (userPassword == userConfPassword) {
@@ -104,7 +106,9 @@ app.post('/register', async (req, res) => {
             await User.create({
                 username: userName,
                 email: userEmail,
-                password: hashedPassword
+                password: hashedPassword,
+                score: userScore,
+                time: userTime
             });
 
             res.json({
@@ -126,6 +130,32 @@ app.post('/register', async (req, res) => {
         });
     }
 
+});
+
+app.post('/quiz', async (req, res) => {
+    let userScore = req.body.score;
+    let userTime = req.body.time;
+
+    try {
+
+        await User.create({
+            score: userScore,
+            time: userTime
+        });
+
+        res.json({
+            result: 'Score and time updated'
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.json({
+            result: 'Error updating score and time'
+        }); 
+
+    }
 });
 
 app.listen(5000, () => {
