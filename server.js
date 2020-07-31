@@ -78,14 +78,14 @@ app.post('/login', async (req,res) => {
 
 });
 
-app.get('/', auth.isLoggedIn , (req, res) => {
+app.get('/login', auth.isLoggedIn , (req, res) => {
 
     if( req.foundUser ){
         res.json({
             result: 'You are logged in'
         });
     } else {
-        res.redirect('/');
+        res.json('Error logging in');
     }
 });
 
@@ -95,7 +95,7 @@ app.post('/register', async (req, res) => {
     let userPassword = req.body.password;
     let userConfPassword = req.body.passwordConf;
     let userScore = 0;
-    let userTime = 0;
+    //let userTime = 0;
 
     
     if (userPassword == userConfPassword) {
@@ -108,7 +108,7 @@ app.post('/register', async (req, res) => {
                 email: userEmail,
                 password: hashedPassword,
                 score: userScore,
-                time: userTime
+                //time: userTime
             });
 
             res.json({
@@ -134,13 +134,17 @@ app.post('/register', async (req, res) => {
 
 app.post('/quiz', async (req, res) => {
     let userScore = req.body.score;
-    let userTime = req.body.time;
+    //let userTime = req.body.time;
+    let userEmail = req.body.email;
+
+    const user = await User.find({email: userEmail});
 
     try {
 
-        await User.create({
+        await User.findByIdAndUpdate(user[0]._id, {
             score: userScore,
-            time: userTime
+            //time: userTime,
+            //email: userEmail
         });
 
         res.json({

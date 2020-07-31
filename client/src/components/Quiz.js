@@ -16,7 +16,8 @@ function Quiz() {
     //SCORE
     const [scoreAndTime, setScoreAndTime] = useState({
         userScore: 0,
-        userTime: 0
+        //userTime: 0,
+        userEmail: ""
     });
 
     const getApi = async () => {
@@ -43,7 +44,8 @@ function Quiz() {
     
         const body = JSON.stringify({
           score: scoreAndTime.userScore,
-          time: scoreAndTime.userTime
+          //time: scoreAndTime.userTime,
+          email: scoreAndTime.userEmail
         });
     
         console.log(body);
@@ -57,21 +59,6 @@ function Quiz() {
         const res = await axios.post("/quiz", body, config);
     
         console.log(res.data.result);
-    
-        // if([e.target.name] === questionDetails.correctAnswer){
-    
-        //   setScoreAndTime({
-        //     ...scoreAndTime,
-        //     [e.target.name]: + 1
-        //   })
-    
-        // } else {
-    
-        //   setScoreAndTime({
-        //     ...scoreAndTime,
-        //     [e.target.name]: + 0
-        //   })
-        // }
     
         getApi();
     }
@@ -88,31 +75,39 @@ function Quiz() {
           [e.target.name]: + 1
         })
         console.log(e.target.name);
-      }
+    }
     
-      const setWrongScore = (e) => {
-    
+    const setWrongScore = (e) => {
+
         setScoreAndTime({
-          ...scoreAndTime,
-          [e.target.name]: + 0
+            ...scoreAndTime,
+            [e.target.name]: + 0
         })
         console.log(e.target.name);
-      }
+    }
+
+    const setData = (e) => {
+        setScoreAndTime({
+          ...scoreAndTime,
+          [e.target.name]: e.target.value
+        })
+    }
 
     return(
         <div className="Quiz">
             <h2>Quiz</h2>
             <h2>{questionDetails.question}</h2>
             <form>
-            <input type="radio" name="userScore" id="answer"  onChange={setScore}/>
-            <label htmlFor="answer">{questionDetails.correctAnswer}</label> <br />
-            <input type="radio" name="userScoreWrong" id="wrong1"  onChange={setWrongScore}/>
-            <label htmlFor="wrongAnswer1">{questionDetails.incorrectAnswer1}</label> <br />
-            <input type="radio" name="userScoreWrong" id="wrong2"  onChange={setWrongScore}/>
-            <label htmlFor="wrongAnswer2">{questionDetails.incorrectAnswer2}</label> <br />
-            <input type="radio" name="userScoreWrong" id="wrong3"  onChange={setWrongScore}/>
-            <label htmlFor="wrongAnswer3">{questionDetails.incorrectAnswer3}</label> <br />
-            <button type="submit" onClick={registerScoreAndTime}>ANSWER</button>
+                <input type="text" name ="userEmail" placeholder="Enter your email..." onChange={setData}/><br />
+                <input type="radio" name="userScore" id="answer"  onChange={setScore}/>
+                <label htmlFor="answer">{questionDetails.correctAnswer}</label> <br />
+                <input type="radio" name="userScoreWrong" id="wrong1"  onChange={setWrongScore}/>
+                <label htmlFor="wrongAnswer1">{questionDetails.incorrectAnswer1}</label> <br />
+                <input type="radio" name="userScoreWrong" id="wrong2"  onChange={setWrongScore}/>
+                <label htmlFor="wrongAnswer2">{questionDetails.incorrectAnswer2}</label> <br />
+                <input type="radio" name="userScoreWrong" id="wrong3"  onChange={setWrongScore}/>
+                <label htmlFor="wrongAnswer3">{questionDetails.incorrectAnswer3}</label> <br />
+                <button type="submit" onClick={registerScoreAndTime}>ANSWER</button>
             </form>
             <h3>Score: {scoreAndTime.userScore}</h3>
         </div>
