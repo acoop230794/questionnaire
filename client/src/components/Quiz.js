@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
+import Timer from './Timer';
 import axios from 'axios';
 import './Quiz.css';
+import RadioButton from './RadioButton';
 
 function Quiz() {
 
@@ -21,8 +23,9 @@ function Quiz() {
     });
 
     const getApi = async () => {
-
-        const res = await axios.get("https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple");
+      
+      const res = await axios.get("https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple");
+        // const res = await axios.get("https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple");
         //console.log(res.data.results[0]);
     
         // const question = Map(res.data.results.question);
@@ -94,22 +97,26 @@ function Quiz() {
     }
 
     return(
-        <div className="Quiz">
-            <h2>Quiz</h2>
-            <h2>{questionDetails.question}</h2>
-            <form>
-                <input type="text" name ="userEmail" placeholder="Enter your email..." onChange={setData}/><br />
-                <input type="radio" name="userScore" id="answer"  onChange={setScore}/>
-                <label htmlFor="answer">{questionDetails.correctAnswer}</label> <br />
-                <input type="radio" name="userScoreWrong" id="wrong1"  onChange={setWrongScore}/>
-                <label htmlFor="wrongAnswer1">{questionDetails.incorrectAnswer1}</label> <br />
-                <input type="radio" name="userScoreWrong" id="wrong2"  onChange={setWrongScore}/>
-                <label htmlFor="wrongAnswer2">{questionDetails.incorrectAnswer2}</label> <br />
-                <input type="radio" name="userScoreWrong" id="wrong3"  onChange={setWrongScore}/>
-                <label htmlFor="wrongAnswer3">{questionDetails.incorrectAnswer3}</label> <br />
-                <button type="submit" onClick={registerScoreAndTime}>ANSWER</button>
-            </form>
-            <h3>Score: {scoreAndTime.userScore}</h3>
+        <div className="quiz">
+          <div className="container">
+            <h2>Quizzical</h2>
+              <h2>{questionDetails.question}</h2>
+              <form>
+                <RadioButton />
+                  <input type="text" className="quizEmail" name ="userEmail" placeholder="Enter your email..." onChange={setData}/><br />
+                  <input type="radio" name="userScore" id="answer"  onChange={setScore}/>
+                  <label htmlFor="answer">{questionDetails.correctAnswer}</label> <br />
+                  <input type="radio" name="userScoreWrong" id="wrong1"  onChange={setWrongScore}/>
+                  <label htmlFor="wrongAnswer1">{questionDetails.incorrectAnswer1}</label> <br />
+                  <input type="radio" name="userScoreWrong" id="wrong2"  onChange={setWrongScore}/>
+                  <label htmlFor="wrongAnswer2">{questionDetails.incorrectAnswer2}</label> <br />
+                  <input type="radio" name="userScoreWrong" id="wrong3"  onChange={setWrongScore}/>
+                  <label htmlFor="wrongAnswer3">{questionDetails.incorrectAnswer3}</label> <br />
+                  <button type="submit" onClick={registerScoreAndTime}>ANSWER</button>
+              </form>
+              <h3 className="playerScore">Score: {scoreAndTime.userScore}</h3>
+              <Timer />
+          </div>
         </div>
     );
     

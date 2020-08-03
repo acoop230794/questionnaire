@@ -5,14 +5,16 @@ const Register = (props) => {
     
     return(
         <div className = "register">
-            <h1>Register page</h1>
-            <form>
-                <input type="text" name="username" onChange={props.setUserData} placeholder="Enter username..."/><br />
-                <input type="email" name="userEmail" onChange={props.setUserData} placeholder="Enter email..." /><br />
-                <input type="password" name="userPassword" onChange={props.setUserData} placeholder="Enter password..."/><br />
-                <input type="password" name="userConfPassword" onChange={props.setUserData} placeholder="Confirm password..."/><br />
-                <button type="submit" onClick={props.registerUser}>REGISTER</button>
-            </form>
+            <div className="container">
+                <h2>Register to play quizzical</h2>
+                <form>
+                    <input type="text" name="username" onChange={props.setUserData} placeholder="Enter username..."/><br />
+                    <input type="email" name="userEmail" onChange={props.setUserData} placeholder="Enter email..." /><br />
+                    <input type="password" name="userPassword" onChange={props.setUserData} placeholder="Enter password..."/><br />
+                    <input type="password" name="userConfPassword" onChange={props.setUserData} placeholder="Confirm password..."/><br />
+                    <button type="submit" onClick={props.registerUser}>REGISTER</button>
+                </form>
+            </div> 
         </div>
     )
 }

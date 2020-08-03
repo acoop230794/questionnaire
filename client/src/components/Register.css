@@ -1,5 +1,38 @@
 .register {
-    background-color: rgb(240, 240, 240);
+    display: flex;
     text-align: center;
-    height: 80vh;
+    height: 100vh;
+    background: url('../images/4135503.jpg') no-repeat;
+}
+
+.container {
+    width: 900px;
+    margin: auto;
+}
+
+h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.register input {
+    margin: 0 0 10px 0;
+    height: 45px;
+    text-indent: 5px;
+    font-size: 12px;
+    width: 50%;
+}
+
+.register button {
+    width: 50% !important;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 45px;
+    cursor: pointer;
+    background-color: #f6b93b;
+    color: #fff;
+    border: none;
+    transition: all .3s ease-in-out;
 }
