@@ -1,4 +1,43 @@
 .quiz {
-    background-color: rgb(240, 240, 240);
+    background: url('../images/4135503.jpg') no-repeat;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+}
+
+.quiz .container {
+    flex-direction: column;
+    text-align: left;
+}
+
+.quizEmail {
+    height: 45px;
+    width: 30%;
+}
+
+.quiz input {
+    text-indent: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.quiz label {
+    color: #fff;
+}
+
+.quiz button {
+    margin-bottom: 10px;
+    width: 30%;
+    height: 45px;
+    cursor: pointer;
+    background-color: #f6b93b;
+    color: #fff;
+    border: none;
+    transition: all .3s ease-in-out;
+}
+
+.playerScore {
+    font-size: 26px;
+    color:  #fff;
     text-align: center;
 }
