@@ -43,6 +43,13 @@ function App() {
 
     const res = await axios.post("/login", body, config);
 
+    if(res.data.result === "Login successful"){
+      window.location.href="/quiz"
+    } else {
+      window.location.href="/login"
+    }
+    
+
     console.log(res.data.result);
   }
 

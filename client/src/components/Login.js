@@ -12,7 +12,7 @@ const Login = (props) => {
           </div>
           <div className="login-right">
             <div className="login-heading">
-              <i class="fas fa-user-lock fa-2x"></i>
+              <i className="fas fa-user-lock fa-2x"></i>
               <h2>Login</h2>
             </div>
             <form>

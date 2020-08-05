@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import Timer from './Timer';
 import axios from 'axios';
 import './Quiz.css';
-import RadioButton from './RadioButton';
 
 function Quiz() {
 
@@ -15,38 +14,48 @@ function Quiz() {
         incorrectAnswer3: ""
     });
 
-    //SCORE
+    //SCORE COUNTER BEFORE SAVE
+    const [tempScore, setTemp] = useState({
+        score: 0,
+        counter: 0,
+        
+        //userTime: 0,
+    });
+
+    //EMAIL
     const [scoreAndTime, setScoreAndTime] = useState({
-        userScore: 0,
         //userTime: 0,
         userEmail: ""
     });
 
     const getApi = async () => {
-      
-      const res = await axios.get("https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple");
-        // const res = await axios.get("https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple");
-        //console.log(res.data.results[0]);
-    
-        // const question = Map(res.data.results.question);
-    
-        // console.log(question);
-    
-        setQuestionDetails({
-          question: res.data.results[0].question,
-          correctAnswer: res.data.results[0].correct_answer,
-          incorrectAnswer1: res.data.results[0].incorrect_answers[0],
-          incorrectAnswer2: res.data.results[0].incorrect_answers[1],
-          incorrectAnswer3: res.data.results[0].incorrect_answers[2]
-        })
-      }
 
-      const registerScoreAndTime = async (e) => {
+        // const counter = tempScore.counter + 1;
+
+      
+        const res = await axios.get("https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple")
+        
+        setQuestionDetails({
+            question: res.data.results[0].question,
+            correctAnswer: res.data.results[0].correct_answer,
+            incorrectAnswer1: res.data.results[0].incorrect_answers[0],
+            incorrectAnswer2: res.data.results[0].incorrect_answers[1],
+            incorrectAnswer3: res.data.results[0].incorrect_answers[2]
+        })
+    }
+
+    const nextQuestion = (e) => {
+        e.preventDefault();
+
+        getApi();
+    }
+
+    const registerScoreAndTime = async (e) => {
 
         e.preventDefault();
     
         const body = JSON.stringify({
-          score: scoreAndTime.userScore,
+          score: tempScore.score,
           //time: scoreAndTime.userTime,
           email: scoreAndTime.userEmail
         });
@@ -62,8 +71,6 @@ function Quiz() {
         const res = await axios.post("/quiz", body, config);
     
         console.log(res.data.result);
-    
-        getApi();
     }
 
     useEffect(() => {
@@ -72,21 +79,13 @@ function Quiz() {
     }, [] );
 
     const setScore = (e) => {
+        e.preventDefault();
 
-        setScoreAndTime({
-          ...scoreAndTime,
-          [e.target.name]: + 1
+        setTemp({
+          [e.target.name]: tempScore.score + parseInt(e.target.value),
+          counter: tempScore.counter + 1
         })
-        console.log(e.target.name);
-    }
-    
-    const setWrongScore = (e) => {
-
-        setScoreAndTime({
-            ...scoreAndTime,
-            [e.target.name]: + 0
-        })
-        console.log(e.target.name);
+        console.log(e.target.value);
     }
 
     const setData = (e) => {
@@ -101,21 +100,21 @@ function Quiz() {
           <div className="container">
             <h2>Quizzical</h2>
               <h2>{questionDetails.question}</h2>
-              <form>
-                <RadioButton />
-                  <input type="text" className="quizEmail" name ="userEmail" placeholder="Enter your email..." onChange={setData}/><br />
-                  <input type="radio" name="userScore" id="answer"  onChange={setScore}/>
-                  <label htmlFor="answer">{questionDetails.correctAnswer}</label> <br />
-                  <input type="radio" name="userScoreWrong" id="wrong1"  onChange={setWrongScore}/>
-                  <label htmlFor="wrongAnswer1">{questionDetails.incorrectAnswer1}</label> <br />
-                  <input type="radio" name="userScoreWrong" id="wrong2"  onChange={setWrongScore}/>
-                  <label htmlFor="wrongAnswer2">{questionDetails.incorrectAnswer2}</label> <br />
-                  <input type="radio" name="userScoreWrong" id="wrong3"  onChange={setWrongScore}/>
-                  <label htmlFor="wrongAnswer3">{questionDetails.incorrectAnswer3}</label> <br />
-                  <button type="submit" onClick={registerScoreAndTime}>ANSWER</button>
-              </form>
-              <h3 className="playerScore">Score: {scoreAndTime.userScore}</h3>
-              <Timer />
+              <h3 className="playerScore">Score: {tempScore.score}</h3>
+              
+            <form>
+                <input type="text" className="quizEmail" name ="userEmail" placeholder="Enter your email..." onChange={setData}/><br />
+                <button type="submit" name="score" value={1} onClick={setScore}>{questionDetails.correctAnswer}</button><br />
+                <button type="submit" name="score" value={0} onClick={setScore}>{questionDetails.incorrectAnswer1}</button><br />
+                <button type="submit" name="score" value={0} onClick={setScore}>{questionDetails.incorrectAnswer2}</button><br />
+                <button type="submit" name="score" value={0} onClick={setScore}>{questionDetails.incorrectAnswer3}</button><br />
+                <button type="submit" onClick={nextQuestion}>NEXT</button>
+            </form>
+            <form>
+                  <button type="submit" onClick={registerScoreAndTime}>SAVE SCORE</button>
+            </form>
+              
+            <Timer />
           </div>
         </div>
     );
