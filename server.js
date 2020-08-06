@@ -165,6 +165,13 @@ app.post('/quiz', async (req, res) => {
     }
 });
 
+app.get('/leaderboard', async (req, res) => {
+    const users = await User.find();
+    res.json({
+        data: users
+    })
+})
+
 app.listen(5000, () => {
     console.log('Server are running on port: 5000');
 });

@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import Timer from './Timer';
-import Dropdown from './Dropdown';
+// import Timer from './Timer';
+// import Dropdown from './Dropdown';
 import axios from 'axios';
 import './Quiz.css';
 
-function Quiz() {
+function Quiz(props) {
 
     //QUIZ
     const [questionDetails, setQuestionDetails] = useState({
@@ -22,23 +22,31 @@ function Quiz() {
         difficulty: '' 
     });
 
+    // const [category, setCategory] = useState({
+    //     category: 0
+    // });
+
+    // const [difficulty, setDifficulty] = useState ({
+    //     difficulty: ''
+    // });
+
     //SCORE COUNTER BEFORE SAVE
     const [tempScore, setTemp] = useState({
         score: 0
     });
 
-    //EMAIL
-    const [scoreAndTime, setScoreAndTime] = useState({
-        userEmail: ""
-    });
+    // //EMAIL
+    // const [scoreAndTime, setScoreAndTime] = useState({
+    //     userEmail: ""
+    // });
 
-    const getApi = async () => {
+    const getApi = async () => { 
 
-        const category = dropdown.category;
-        const difficulty = dropdown.difficulty;
+        const url = `https://opentdb.com/api.php?amount=10&category=${dropdown.category}&difficulty=${dropdown.difficulty}&type=multiple`;
+        const res = await axios.get(url);
 
-        const res = await axios.get(`https://opentdb.com/api.php?amount=20&category=${category}&difficulty=${difficulty}&type=multiple`);
-        
+        console.log(res);
+
         setQuestionDetails({
             question: res.data.results[0].question,
             correctAnswer: res.data.results[0].correct_answer,
@@ -62,7 +70,7 @@ function Quiz() {
         const body = JSON.stringify({
           score: tempScore.score,
           //time: scoreAndTime.userTime,
-          email: scoreAndTime.userEmail
+        //   email: scoreAndTime.userEmail
         });
     
         console.log(body);
@@ -79,12 +87,11 @@ function Quiz() {
     }
 
     useEffect(() => {
-        getApi();
+        
         console.log('Page loaded')
     }, [] );
 
     const setScore = (e) => {
-        e.preventDefault();
 
         setTemp({
           [e.target.name]: tempScore.score + parseInt(e.target.value),
@@ -93,59 +100,85 @@ function Quiz() {
         console.log(e.target.value);
     }
 
-    const setData = (e) => {
-        setScoreAndTime({
-          ...scoreAndTime,
-          [e.target.name]: e.target.value
+    // const setData = (e) => {
+    //     setScoreAndTime({
+    //       ...scoreAndTime,
+    //       [e.target.name]: e.target.value
+    //     })
+    // }
+
+    const setApi = (e) => {
+        
+        console.log(e.target.name);
+        console.log(e.target.value);
+
+        setDropDown({
+            ...dropdown,
+            [e.target.name] : e.target.value
         })
     }
 
-    const setApi =  (e) => {
+    const fetchApi = (e) => {
         e.preventDefault();
-
-        setDropDown({
-         [e.target.name] : e.target.value
-       })
+        getApi();
     }
 
-    if(questionDetails.data < 20){
+    console.log(dropdown.category);
+
+    // if(questionDetails.data < 20){
     return  (
         <div className="quiz">
           <div className="container">
-            <h2>Quizzical</h2>
-                <h2><Dropdown setApi={setApi}/></h2>  
+            
+            <form>
+                <label htmlFor="category">Category</label>
+                <select name="category" onChange={setApi}>
+                    <option value="9">Genral Knowledge</option>
+                    <option value="21">Sport</option>
+                    <option value="26">Celebrities</option>
+                </select>
+                <label htmlFor="difficulty"></label>
+                <select name="difficulty" onChange={setApi}>
+                    <option name="difficulty" value="easy">Easy</option>
+                    <option name="difficulty" value="medium">Medium</option>
+                    <option name="difficulty" value="hard">Hard</option>
+                </select>
+                <button type="submit" onClick={fetchApi}>Submit</button>
+            </form>  
                 <h2>{questionDetails.question}</h2>
-                <h3 className="playerScore">Score: {tempScore.score}</h3>
+                {/* <h2>{questionDetails.question}</h2> */}
+                
             <form className="quiz-btns">
-                <input type="text" className="quizEmail" name ="userEmail" placeholder="Enter your email..." onChange={setData}/><br />
+                {/* <input type="text" className="quizEmail" name ="userEmail" placeholder="Enter your email..." onChange={setData}/><br /> */}
                 <button className="btn-ans" type="submit" name="score" value={1} onClick={setScore}>{questionDetails.correctAnswer}</button>
                 <button className="btn-ans" type="submit" name="score" value={0} onClick={setScore}>{questionDetails.incorrectAnswer1}</button>
                 <button className="btn-ans" type="submit" name="score" value={0} onClick={setScore}>{questionDetails.incorrectAnswer2}</button>
                 <button className="btn-ans" type="submit" name="score" value={0} onClick={setScore}>{questionDetails.incorrectAnswer3}</button>
                 <button className="btn-next" type="submit" onClick={nextQuestion}>NEXT<i class="fa fa-angle-double-right"></i></button>
             </form>
-            <form>
+            <form className="score-btns">
                   <button className="btn-save" type="submit" onClick={registerScoreAndTime}>SAVE SCORE</button>
+                  <h3 className="playerScore">Score: {tempScore.score}</h3>
             </form>
               
-            <Timer />
           </div>
         </div>
-    )} else {
-        return(
-            <div className="quiz">
-                <div className="container">
-                    <h2>Quizzical</h2>
-                    <h3>FINISHED!!</h3>
-                    <form>
-                        <button type="submit" onClick={registerScoreAndTime}>SAVE SCORE</button>
-                    </form>
-                </div>
-            </div>
-        )
-    }
+     )}
+     // else {
+    //     return(
+    //         <div className="quiz">
+    //             <div className="container">
+    //                 <h2>Quizzical</h2>
+    //                 <h3>FINISHED!!</h3>
+    //                 <form>
+    //                     <button type="submit" onClick={registerScoreAndTime}>SAVE SCORE</button>
+    //                 </form>
+    //             </div>
+    //         </div>
+    //     )
+     //}
     
-}
+ //}
 
 
 export default Quiz;

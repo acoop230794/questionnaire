@@ -1,8 +1,8 @@
 .quiz {
     background: url('../images/4135503.jpg') no-repeat;
     text-align: center;
-    height: 100vh;
     display: flex;
+    height: 100vh;
 }
 .quiz .container {
     flex-direction: column;
@@ -62,9 +62,14 @@
     background-color: transparent;
     color: #333;
 }
+
+button:focus {
+    outline: none;
+}
+
 .playerScore,
 .btn-save {
-    background-color: #F6B93B;
+    background-color: #ee5253;
     font-size: 26px;
     color: #fff;
     text-align: center;
@@ -74,15 +79,20 @@
     width: 30%;
     margin: 2rem auto;
     transform: skew(-3deg, -3deg);
-    box-shadow: 8px 8px 0px 0px rgba(241,196,15,1);
+    box-shadow: 8px 8px 0px 0px #ff6b6b;
     border: 1px solid rgba(0,0,0, .2);
 }
 .btn-save {
-    background-color: #7F8C8D;
-    box-shadow: 8px 8px 0px 0px #95A5A6;
+    background-color: #ee5253;
+    box-shadow: 8px 8px 0px 0px #ff6b6b;
     cursor: pointer;
     transition: all .4s ease-in-out;
 }
 .btn-save:hover {
-    background-color: #95A5A6;
+    background-color: #ff6b6b;
+}
+
+.score-btns {
+    display: flex;
+    justify-content: space-between;
 }
