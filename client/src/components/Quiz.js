@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Timer from './Timer';
+import Dropdown from './Dropdown';
 import axios from 'axios';
 import './Quiz.css';
 
@@ -11,36 +12,40 @@ function Quiz() {
         correctAnswer: "",
         incorrectAnswer1: "",
         incorrectAnswer2: "",
-        incorrectAnswer3: ""
+        incorrectAnswer3: "",
+        data: ""
+    });
+
+    // DROPDOWN STATE
+    const [ dropdown, setDropDown ] = useState( {
+        category: '',
+        difficulty: '' 
     });
 
     //SCORE COUNTER BEFORE SAVE
     const [tempScore, setTemp] = useState({
-        score: 0,
-        counter: 0,
-        
-        //userTime: 0,
+        score: 0
     });
 
     //EMAIL
     const [scoreAndTime, setScoreAndTime] = useState({
-        //userTime: 0,
         userEmail: ""
     });
 
     const getApi = async () => {
 
-        // const counter = tempScore.counter + 1;
+        const category = dropdown.category;
+        const difficulty = dropdown.difficulty;
 
-      
-        const res = await axios.get("https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple")
+        const res = await axios.get(`https://opentdb.com/api.php?amount=20&category=${category}&difficulty=${difficulty}&type=multiple`);
         
         setQuestionDetails({
             question: res.data.results[0].question,
             correctAnswer: res.data.results[0].correct_answer,
             incorrectAnswer1: res.data.results[0].incorrect_answers[0],
             incorrectAnswer2: res.data.results[0].incorrect_answers[1],
-            incorrectAnswer3: res.data.results[0].incorrect_answers[2]
+            incorrectAnswer3: res.data.results[0].incorrect_answers[2],
+            data: res.data.results
         })
     }
 
@@ -95,29 +100,50 @@ function Quiz() {
         })
     }
 
-    return(
+    const setApi =  (e) => {
+        e.preventDefault();
+
+        setDropDown({
+         [e.target.name] : e.target.value
+       })
+    }
+
+    if(questionDetails.data < 20){
+    return  (
         <div className="quiz">
           <div className="container">
             <h2>Quizzical</h2>
-              <h2>{questionDetails.question}</h2>
-              <h3 className="playerScore">Score: {tempScore.score}</h3>
-              
-            <form>
+                <h2><Dropdown setApi={setApi}/></h2>  
+                <h2>{questionDetails.question}</h2>
+                <h3 className="playerScore">Score: {tempScore.score}</h3>
+            <form className="quiz-btns">
                 <input type="text" className="quizEmail" name ="userEmail" placeholder="Enter your email..." onChange={setData}/><br />
-                <button type="submit" name="score" value={1} onClick={setScore}>{questionDetails.correctAnswer}</button><br />
-                <button type="submit" name="score" value={0} onClick={setScore}>{questionDetails.incorrectAnswer1}</button><br />
-                <button type="submit" name="score" value={0} onClick={setScore}>{questionDetails.incorrectAnswer2}</button><br />
-                <button type="submit" name="score" value={0} onClick={setScore}>{questionDetails.incorrectAnswer3}</button><br />
-                <button type="submit" onClick={nextQuestion}>NEXT</button>
+                <button className="btn-ans" type="submit" name="score" value={1} onClick={setScore}>{questionDetails.correctAnswer}</button>
+                <button className="btn-ans" type="submit" name="score" value={0} onClick={setScore}>{questionDetails.incorrectAnswer1}</button>
+                <button className="btn-ans" type="submit" name="score" value={0} onClick={setScore}>{questionDetails.incorrectAnswer2}</button>
+                <button className="btn-ans" type="submit" name="score" value={0} onClick={setScore}>{questionDetails.incorrectAnswer3}</button>
+                <button className="btn-next" type="submit" onClick={nextQuestion}>NEXT<i class="fa fa-angle-double-right"></i></button>
             </form>
             <form>
-                  <button type="submit" onClick={registerScoreAndTime}>SAVE SCORE</button>
+                  <button className="btn-save" type="submit" onClick={registerScoreAndTime}>SAVE SCORE</button>
             </form>
               
             <Timer />
           </div>
         </div>
-    );
+    )} else {
+        return(
+            <div className="quiz">
+                <div className="container">
+                    <h2>Quizzical</h2>
+                    <h3>FINISHED!!</h3>
+                    <form>
+                        <button type="submit" onClick={registerScoreAndTime}>SAVE SCORE</button>
+                    </form>
+                </div>
+            </div>
+        )
+    }
     
 }
 

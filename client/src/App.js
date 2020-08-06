@@ -20,38 +20,9 @@ function App() {
   });
 
   useEffect(() => {
-    //getApi();
+    
     console.log('Page loaded')
   }, [] );
-
-  //LOGIN
-  const loginForm = async (e) => {
-    e.preventDefault();
-
-    const body = JSON.stringify({
-      email: userDetails.userEmail,
-      password: userDetails.userPassword
-    });
-
-    console.log(body);
-
-    const config = {
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    }
-
-    const res = await axios.post("/login", body, config);
-
-    if(res.data.result === "Login successful"){
-      window.location.href="/quiz"
-    } else {
-      window.location.href="/login"
-    }
-    
-
-    console.log(res.data.result);
-  }
 
   //REGISTER USER
   const registerUserDetails = async (e) => {
@@ -84,20 +55,14 @@ function App() {
     })
   }
 
-  //POST send to db
-  //GET retrieve from db
-  //DELETE  axios.delete('/users') BACK-END app.delete('/users')
-  //PUT     axios.put('/users') BACK-END app.put('/users')
-
   return (
     <div className="App">
-
       <React.Fragment>
         <BrowserRouter>
           <Navbar  />
           <Switch>
-            <Route exact path = "/login" render = {() => <Login loginForm = {loginForm} setData = {setData} />} />
-            <Route exact path = "/quiz" render = {() => <Quiz />} />
+            <Route exact path = "/" render = {() => <Login />} />
+            <Route exact path = "/quiz"  render = {() => <Quiz />} /> 
             <Route exact path = "/register" render = {() => <Register registerUser = {registerUserDetails} setUserData = {setData} />} />
             <Route exact path = "/leaderboard" render = {() => <Leaderboard />} />
           </Switch>
@@ -105,6 +70,7 @@ function App() {
       </React.Fragment>
     </div>
   );
+  
 }
 
 export default App;

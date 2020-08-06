@@ -5,6 +5,7 @@ const Leaderboard = (props) => {
     
     return(
         <div className = "leaderboard">
+            
             <h1>Leaderboard page</h1>
             
         </div>

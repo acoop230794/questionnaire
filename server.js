@@ -58,13 +58,15 @@ app.post('/login', async (req,res) => {
             res.cookie('jwt', token, cookieOptions);
 
             res.json({
-                result: 'Login successful'
+                result: 'Login successful',
+                cookie: true
             });
 
         } else{
 
             res.json({
-                result: 'Login details are incorrect'
+                result: 'Login details are incorrect',
+                cookie: false
             });
 
         }
@@ -72,7 +74,8 @@ app.post('/login', async (req,res) => {
     } else {
 
         res.json({
-            result: 'Login details are incorrect'
+            result: 'Login details are incorrect',
+            cookie: false
         });
     }
 
