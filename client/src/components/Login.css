@@ -61,6 +61,8 @@
     margin: 0 0 10px 0;
     text-indent: 5px;
     font-size: 12px;
+    border: none;
+    border-radius: 4px;
 }
 
 input:focus {
@@ -76,6 +78,7 @@ input:focus {
     color: #fff;
     border: none;
     transition: all .3s ease-in-out;
+    border-radius: 4px;
 }
 
 button:hover {

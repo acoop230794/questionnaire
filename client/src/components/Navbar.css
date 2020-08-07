@@ -20,6 +20,7 @@ nav ul li {
 
 nav ul li:hover {
     background-color: #f6b93b;
+    border-radius: 4px;
 }
 
 nav li a {

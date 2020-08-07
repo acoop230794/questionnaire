@@ -7,7 +7,7 @@ const Result = ({score, playAgain, registerScore}) => (
       Play again!
     </button>
     <form>
-        <button type="submit" onClick={registerScore}>SAVE SCORE</button>
+        <button className="saveBtn" type="submit" onClick={registerScore}>SAVE SCORE</button>
     </form>
   </div>
 );

@@ -1,0 +1,27 @@
+.score-board {
+    height: 52vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: #fff;
+}
+
+.score {
+    margin-bottom: 20px;;
+    font-size: 24px;
+    color: #fff;
+}
+
+.playBtn,
+.saveBtn {
+    width: 30%;
+    margin-bottom: 20px;
+    height: 45px;
+    cursor: pointer;
+    background-color: #f6b93b;
+    color: #fff;
+    border: none;
+    transition: all .3s ease-in-out;
+    border-radius: 4px;;
+
+}
