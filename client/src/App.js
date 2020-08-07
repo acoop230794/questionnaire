@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
-import Quiz from './components/Quiz';
+import QuizBee from './components/QuizBee';
 import Register from './components/Register';
 import Leaderboard from './components/Leaderboard';
 import Login from './components/Login';
@@ -62,7 +62,7 @@ function App() {
           <Navbar  />
           <Switch>
             <Route exact path = "/" render = {() => <Login />} />
-            <Route exact path = "/quiz"  render = {() => <Quiz />} /> 
+            <Route exact path = "/quiz"  render = {() => <QuizBee />} /> 
             <Route exact path = "/register" render = {() => <Register registerUser = {registerUserDetails} setUserData = {setData} />} />
             <Route exact path = "/leaderboard" render = {() => <Leaderboard />} />
           </Switch>

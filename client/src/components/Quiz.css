@@ -9,6 +9,23 @@
     flex-direction: column;
     text-align: left;
 }
+
+.choice {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.choice label {
+    font-size: 20px;
+}
+
+.btn-choice {
+    padding: 5px 25px;
+    border: none;
+    
+}
+
 .quizEmail {
     height: 45px;
     width: 30%;

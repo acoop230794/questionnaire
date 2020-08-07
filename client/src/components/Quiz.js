@@ -129,21 +129,20 @@ function Quiz(props) {
     return  (
         <div className="quiz">
           <div className="container">
-            
-            <form>
+            <form className="choice">
                 <label htmlFor="category">Category</label>
                 <select name="category" onChange={setApi}>
                     <option value="9">Genral Knowledge</option>
                     <option value="21">Sport</option>
                     <option value="26">Celebrities</option>
                 </select>
-                <label htmlFor="difficulty"></label>
+                <label htmlFor="difficulty">Difficulty</label>
                 <select name="difficulty" onChange={setApi}>
                     <option name="difficulty" value="easy">Easy</option>
                     <option name="difficulty" value="medium">Medium</option>
                     <option name="difficulty" value="hard">Hard</option>
                 </select>
-                <button type="submit" onClick={fetchApi}>Submit</button>
+                <button type="submit" className="btn-choice" onClick={fetchApi}>Submit</button>
             </form>  
                 <h2>{questionDetails.question}</h2>
                 {/* <h2>{questionDetails.question}</h2> */}

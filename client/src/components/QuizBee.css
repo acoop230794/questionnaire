@@ -1,0 +1,64 @@
+.quizBee {
+    display: flex;
+    background-image: url('../images/4135503.jpg');
+    background-repeat: repeat-y;
+    background-size: cover;
+    color: #fff;
+}
+
+.quizbee-inner {
+    max-width: 900px;
+    width: 100%;
+    margin: auto;
+}
+
+.title h1 {
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: -4px;
+    text-transform: uppercase;
+}
+
+.title h1 span {
+    font-size: 50px;
+    font-weight: 600;
+    color: #f6b93b;
+}
+
+.quizbee-inner input {
+    width: 50%;
+    height: 45px;
+    text-indent: 10px;
+    border-radius: 4px;
+    border: none;
+    margin-bottom: 20px;
+    
+}
+
+.selection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.selection label {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.selection select {
+    width: 25%;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+.btn-select {
+    padding: 14px 30px;
+    background-color: #f6b93b;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+}
