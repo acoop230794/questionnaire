@@ -115,7 +115,7 @@ app.post('/register', async (req, res) => {
             });
 
             res.json({
-                result: 'User registered'
+                 result: 'User registered'
             });
 
         } catch (error) {

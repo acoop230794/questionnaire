@@ -13,16 +13,18 @@ function Leaderboard  ()  {
     }
     const displayUsers = users.length > 0 && users.map((data, index) => {
         return (
-        <div key={index}>
-            <h3>{data.username} {data.score}</h3>
+        <div className="displayUsers" key={index}>
+            <p>{data.username}</p> <p>{data.score}</p>
         </div>
         )
     })
     return(
-        <div>
-            <h1>Leaderboard</h1>
-            <div className = "leaderboard">
-                {displayUsers}
+        <div className = "leaderboard">
+            <div className="leaderboard-inner">
+                <h1>Leaderboard</h1>
+            
+                    {displayUsers}
+                
             </div>
         </div>
     )

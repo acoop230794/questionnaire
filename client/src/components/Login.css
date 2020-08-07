@@ -1,9 +1,8 @@
 .login {
     display: flex;
-    text-align: center;
     height: 100vh;
     background-image: url('../images/4135503.jpg');
-    overflow-y: hidden;
+    background-size: cover;
     color: #fff;
 }
 
@@ -15,9 +14,32 @@
     margin: auto;
 }
 
+.login-inner ul {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.login ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.fa-check-square,
+.fa-user-lock {
+    margin-right: 10px;
+    color: #f6b93b;
+}
+
+.login h2 span {
+    font-size: 50px;
+    font-weight: 600;
+    color: #f6b93b;
+}
+
 .login h2 {
     font-size: 36px;
-    margin-left: 10px;
+    font-weight: 400;
     margin-bottom: -4px;
     text-transform: uppercase;
 }
@@ -31,6 +53,7 @@
 .login-heading {
     display: flex;
     align-items: center;
+    
 }
 
 .login input {

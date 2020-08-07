@@ -70,8 +70,12 @@ function Login ()  {
         <div className="login">
             <div className="login-inner">
                 <div className="login-left">
-                    <h2>Quizzical</h2>
-                    <h4>Ready to test your brain against<br /> our skull busting question?</h4>
+                    <h2><span>Q</span>uizzical</h2>
+                    <ul>
+                        <li><i class="far fa-check-square fa-2x"></i>Multiple guess</li>
+                        <li><i class="far fa-check-square fa-2x"></i>Skull busting questions</li>
+                        <li><i class="far fa-check-square fa-2x"></i>Guaranteed to make you smarter</li>
+                    </ul>
                 </div>
                 <div className="login-right">
                     <div className="login-heading">
@@ -80,7 +84,6 @@ function Login ()  {
                     </div>
                     <form>
                         <input type="email" name="userEmail" placeholder="Enter email..." onChange={setData} />
-
                         <input type="password" name="userPassword" placeholder="Enter password..." onChange={setData}/>
                         <button type="submit" onClick={loginForm}>LOG IN</button>
                     </form>
