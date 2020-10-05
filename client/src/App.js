@@ -46,6 +46,14 @@ function App() {
     const res = await axios.post("/register", body, config);
 
     console.log(res.data.result);
+
+    alert(res.data.result);
+
+    if(res.data.result === 'User registered') {
+      window.location.href="/"
+    } else {
+      window.location.href="/register"
+    }
   }
 
   const setData = (e) => {

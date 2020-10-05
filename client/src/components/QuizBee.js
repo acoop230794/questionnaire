@@ -75,7 +75,7 @@ export default class QuizBee extends Component {
                     <div className="title">
                         <h1><span>Q</span>UIZZICAL</h1>
                     </div>
-                    <input type="text" className="quizEmail" name ="userEmail" placeholder="Enter your email..." onChange={this.setApi}/><br />
+                    <input type="text" className="quizEmail" name ="userEmail" placeholder="Enter email to save your score..." onChange={this.setApi}/><br />
                     <div className="dropdown">
                         <form className="selection">
                         <label htmlFor="category">Category</label>
